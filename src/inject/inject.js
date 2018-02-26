@@ -47,37 +47,44 @@ function setAttributes(el, attrs) {
 
 function parseTable(){
   var csv = "";
-  var tbls = document.getElementsByTagName("table");
+  // var tbls = document.getElementsByTagName("table");
+  var tbls = document.getElementsByTagName("visualize")
   for (var i = 0; i < tbls.length; i++) {
     var tbl = tbls.item(i);
     var h = tbl.innerHTML + "";
 
-    //Replace comma with colon
-    h = h.replace(/,/g, ";");
+    var title = tbl.getAttribute("data-title");
+    var value = tbl.getElementsByClassName("metric-value")[0].innerText;
+    value = value.replace(/,/g,"");
 
-    //Remove multiple-whitespaces with one
-    h = h.replace(/\s+/g, ' ');
+    csv += title + ':' + value + '\n';
 
-    //Convert all tag word characters to lower case
-    h = h.replace(/<\/*\w+/g, function (s) {
-      return s.toLowerCase();
-    });
+    // //Replace comma with colon
+    // h = h.replace(/,/g, ";");
 
-    //special cases
-    h = h.replace(/<tr><\/tr>/g, "");
+    // //Remove multiple-whitespaces with one
+    // h = h.replace(/\s+/g, ' ');
 
-    //Convert the table tags to commas and white spaces
-    h = h.replace(/<\/tr>/g, "\n");
-    h = h.replace(/<\/td>/g, ",");
-    h = h.replace(/<\/th>/g, ",");
-    h = h.replace(/( )?<.+?>( )?/g, "");
+    // //Convert all tag word characters to lower case
+    // h = h.replace(/<\/*\w+/g, function (s) {
+    //   return s.toLowerCase();
+    // });
 
-    h = h.replace(/,\n/g, "\n");
-    h = h.replace(/\n,/g, "\n");
+    // //special cases
+    // h = h.replace(/<tr><\/tr>/g, "");
 
-    h = h.replace(/^\s+/g, "");
-    h = h.replace(/^,/g, '');
-    csv += h;
+    // //Convert the table tags to commas and white spaces
+    // h = h.replace(/<\/tr>/g, "\n");
+    // h = h.replace(/<\/td>/g, ",");
+    // h = h.replace(/<\/th>/g, ",");
+    // h = h.replace(/( )?<.+?>( )?/g, "");
+
+    // h = h.replace(/,\n/g, "\n");
+    // h = h.replace(/\n,/g, "\n");
+
+    // h = h.replace(/^\s+/g, "");
+    // h = h.replace(/^,/g, '');
+    // csv += h;
   }
   return csv;
 }
