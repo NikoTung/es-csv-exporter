@@ -46,7 +46,7 @@ function setAttributes(el, attrs) {
 }
 
 function parseTable(){
-  var csv = "";
+  var csv = [];
   // var tbls = document.getElementsByTagName("table");
   var tbls = document.getElementsByTagName("visualize")
   for (var i = 0; i < tbls.length; i++) {
@@ -57,7 +57,7 @@ function parseTable(){
     var value = tbl.getElementsByClassName("metric-value")[0].innerText;
     value = value.replace(/,/g,"");
 
-    csv += title + ':' + value + '\n';
+    csv .push([title,value]);
 
     // //Replace comma with colon
     // h = h.replace(/,/g, ";");
